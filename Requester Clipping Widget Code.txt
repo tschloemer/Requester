@@ -1,0 +1,39 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+
+<script> 
+$(document).ready(function(){ 
+    $("button").click(function(){ 
+        $.ajax({ 
+            url: XCC.T.getRootPath(document.getElementById("base").value) 
+
++ document.getElementById("path").value, 
+            data: document.getElementById("xmlrequest").value, 
+            dataType: 'xml', 
+            contentType: 'application/atom+xml', 
+            type: document.getElementById("method").value, 
+            complete: function(data, status){ 
+            $('#response').text(JSON.stringify(data)), 
+            alert("Status: " + status);             
+            } 
+        }); 
+    }); 
+}); 
+</script> 
+
+<strong>Method: </strong> 
+<select id="method" style="background-color: #F0F0F0; width: 100px; border: 1px solid;"> 
+  <option value="get">GET</option> 
+  <option value="post">POST</option> 
+</select> 
+<strong>Module: </strong> 
+<select id="base" style="background-color: #F0F0F0; width: 150px; border: 1px solid;"> 
+  <option value="Communities">Communities</option> 
+  <option value="Activities">Activities</option> 
+  <option value="Blogs">Blogs</option> 
+  <option value="Wikis">Wikis</option> 
+</select> 
+<strong>Path: </strong> <input id="path" style="background-color: #F0F0F0; width: 350px; border: 1px solid;" value="Please specify path for request"></input> 
+<button>Send HTTP Request</button><br> 
+<br> 
+<div id="response" style="float: right; width: 49%; height: 450px; overflow-y: scroll; overflow-x: hidden; border: 1px solid #AAA; background-color: #EEE; color: #AAA">The response from the Connections server will be displayed here!</div> 
+<textarea id="xmlrequest" style="width: 49%; height: 450px; overflow-y: scroll; overflow-x: hidden; background-color: #F0F0F0; border: 1px solid;">Enter XML data for http request or empty this input field! 
